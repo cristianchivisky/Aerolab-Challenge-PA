@@ -3,7 +3,7 @@ import {Card, Grid, CardMedia, CardContent, CardActions, Typography, Button }fro
 
 const Product = ({ product }) => {
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
+    <Grid item xs={10} sm={6} md={4} lg={3} key={product._id}>
       <Link href={`/product/${product._id}`}>
         <Card sx={{ maxWidth: 290, backgroundColor: '#e8e8e8' }}>
           <CardMedia sx={{ height: 220 }} image={product.img.hdUrl} title={product.name} />

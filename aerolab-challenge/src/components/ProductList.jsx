@@ -69,13 +69,15 @@ const ProductList = () => {
 					style={{ width: '100%', height: 'auto' }}
 				/>
 				<Box
-					position="absolute"
-					bottom={0}
-					left={0}
-					color="white"
-					p={7} 
+				position="absolute"
+				bottom={0}
+				left={0}
+				color="white"
+				p={{ xs: 2, sm: 4, md: 6, lg: 8 }}
 				>
-					<Typography variant="h3" fontWeight="bold">Electronic</Typography>
+				<Typography variant="h3" fontWeight="bold">
+					Electronic
+				</Typography>
 				</Box>
 			</Box>
 			<Grid item xs={12} id="productos">
