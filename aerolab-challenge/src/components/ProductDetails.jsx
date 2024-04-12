@@ -1,96 +1,66 @@
+import { Typography } from '@mui/material';
 import { useQuery } from "@tanstack/react-query";
-import { useRoute, Link } from "wouter";
-import { Card, CardMedia, CardContent, Typography, IconButton, Container, Paper, Grid, } from "@mui/material";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useRoute } from "wouter";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 
-// Solicitud a la API para obtener los productos.
+
 const fetchProduct = async (id) => {
-    const response = await fetch(`https://coding-challenge-api.aerolab.co/products/`, {
+  //const id = '5a0b368e734d1d08bf708558'
+    const response = await fetch(`https://coding-challenge-api.aerolab.co/products/${id}`, {
         headers: {
             'Content-Type':'application/json',
             'Accept':'application/json',
-            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ2OTg5Njk5YjQ2YzAwMjAzZmU0YmIiLCJpYXQiOjE2OTkxMjUzOTh9.Kcvbaq3nllqd0cDqai-CyP6OGssXPydTrGAWrD3PigQ'
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ2OTg5Mzk5YjQ2YzAwMjAzZmU0YmEiLCJpYXQiOjE2OTkxMjUzOTV9.Wc-Di27XMeuxAwZUZEOs34Luah210Xh3zqAt2ukoP-w'//import.meta.env.VITE_AEROLAB_API_KEY,
         },
     })
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    
-    const products = await response.json();
-    const product = products.find(product => product._id === id);
-    
-    if (!product) {
-      throw new Error(`Product with ID ${id} not found`);
-    }
-    
-    return product;
+    return response.json();
 };
 
 const ProductDetails = () => {
   const [match, params] = useRoute("/product/:id");
-  // Realiza la solicitud de productos específicos y gestiona el estado.
   const { 
       data: product,
       isLoading,
       error,
-  } = useQuery({ 
+  } = useQuery({
     queryKey: ["product", params.id],
     queryFn: () => fetchProduct(params.id),
   });
-  // Renderizan un mensaje de carga mientras se obtiene la información del producto
   if (isLoading) {
     return (
       <Typography align='center' variant='h6'>
-        Loading...
+        Cargando...
       </Typography>
     );
   }
-  // Renderiza un mensaje de error si ocurre algún problema al obtener el producto.
   if (error) {
     return (
       <Typography align='center' variant='h6'>
-        Error fetching Products! {error.message}
+        Error fetching ConsultarApi! {error.message}
       </Typography>
     );
   }
-  // Renderiza la informacion del producto.
+
   return (
-    <Container maxWidth="md" sx={{ marginTop: 4 }}>
-      <Paper elevation={3} sx={{ padding: 2, backgroundColor: "#f0f0f0" }}>
-        <Link href="/">
-          <IconButton color="primary" sx={{ marginBottom: 2 }}>
-            <ArrowBackIcon />
-          </IconButton>
-        </Link>
-        <Grid container justifyContent="center" alignItems="center" spacing={2}>
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardMedia
-                component="img"
-                alt={product.name}
-                height="340"
-                image={product.img.hdUrl}
-              />
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h4" gutterBottom>
-                  {product.name}
-                </Typography>
-                <Typography variant="body1" color="textSecondary" paragraph>
-                  Category: {product.category}
-                </Typography>
-                <Typography variant="body1" color="textSecondary" paragraph>
-                  Price: ${product.cost}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+    <Card sx={{ maxWidth: 345, backgroundColor: "#e8e8e8" }}>
+      <CardMedia sx={{ height: 140 }} image={product.img.hdUrl} title={product.name} />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {product.name}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {product.category}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          $ {product.cost}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 
