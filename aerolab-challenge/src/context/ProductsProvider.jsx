@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from 'react'
 import axios from 'axios'
- 
+
 // Create a React context named ProductsContext
 const ProductsContext = createContext()
 
@@ -23,7 +23,7 @@ const ProductsProvider = ({ children }) => {
                     headers: {
                         'Content-Type':'application/json',
                         'Accept':'application/json',
-                        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ2OTg5Mzk5YjQ2YzAwMjAzZmU0YmEiLCJpYXQiOjE2OTkxMjUzOTV9.Wc-Di27XMeuxAwZUZEOs34Luah210Xh3zqAt2ukoP-w'//import.meta.env.VITE_AEROLAB_API_KEY,
+                        'Authorization': `Bearer ${import.meta.env.VITE_AEROLAB_API_KEY}`,
                     },
                 })
                 const data = resp.data

@@ -1,11 +1,11 @@
 import { Box, Typography, Container, Grid, Tooltip } from '@mui/material';
 
 const TECHLOGOS = [
-    { src: '/src/assets/nodejs.svg', alt: 'Node.js' },
-    { src: '/src/assets/react.svg', alt: 'React' },
-    { src: '/src/assets/axios.svg', alt: 'Axios' },
-    { src: '/src/assets/mui.svg', alt: 'MUI' },
-    { src: '/src/assets/netlify.svg', alt: 'Netlify' },
+    { src: '/img/nodejs.svg', alt: 'Node.js' },
+    { src: '/img/react.svg', alt: 'React' },
+    { src: '/img/axios.svg', alt: 'Axios' },
+    { src: '/img/mui.svg', alt: 'MUI' },
+    { src: '/img/netlify.svg', alt: 'Netlify' },
 ];
 
 const Footer = () => {

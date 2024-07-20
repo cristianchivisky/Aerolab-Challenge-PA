@@ -16,7 +16,7 @@ const Form = () => {
     
     return ( 
         <form>
-            <FormControl sx={{ mt: 2, minWidth: 120, width: { xs: '100%', sm: 'auto', }, fontSize: { xs: '0.8rem', sm: '1rem' },}} >
+            <FormControl sx={{ mt: 2, minWidth: 130, width: { xs: '100%', sm: 'auto', }, fontSize: { xs: '0.8rem', sm: '1rem' },}} >
                 <InputLabel id="category-label">Category</InputLabel>
                 <Select
                  labelId="category-label"
